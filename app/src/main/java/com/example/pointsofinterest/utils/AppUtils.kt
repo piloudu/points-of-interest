@@ -23,9 +23,9 @@ import kotlinx.coroutines.launch
 val mapper: ObjectMapper =
     jacksonObjectMapper().enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 
-inline fun <reified T> String.deserialize(): List<T> = mapper.readValue(
+inline fun <reified T> String.deserialize(): T = mapper.readValue(
     this,
-    object : TypeReference<List<T>>() {}
+    object : TypeReference<T>() {}
 )
 
 fun withViewModelScope(

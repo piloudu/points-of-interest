@@ -1,12 +1,14 @@
 package com.example.pointsofinterest.get_data
 
+import com.example.pointsofinterest.data_model.DataModel
+import com.example.pointsofinterest.data_model.isEmpty
 import com.example.pointsofinterest.utils.deserialize
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 
 object Cache {
     suspend fun get(): CacheData {
         val cache = MainViewModelInstance.state.value.cache
-        return if (cache.pois.isEmpty())
+        return if (cache.dataModel.isEmpty())
             getNewCache()
         else cache
     }
@@ -21,5 +23,5 @@ object Cache {
 }
 
 data class CacheData(
-    val pois: List<Poi> = emptyList()
+    val dataModel: DataModel = DataModel.initial()
 )
