@@ -1,6 +1,7 @@
 package com.example.pointsofinterest
 
 import com.example.pointsofinterest.view_model.MainActivityState
+import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModel
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
@@ -20,9 +21,25 @@ class MviTest {
     @Test
     fun `init app innerState is LOADING`() {
         val initialExpectedState = MainActivityState.initial()
-        val initialState = MainViewModelTestInstance.state
+        val initialState = MainViewModelTestInstance.state.value
         withTestScope {
             initialState shouldBe initialExpectedState
+        }
+    }
+
+    @DisplayName("on data downloaded")
+    @Test
+    fun `app state after downloading data is MAP`() {
+        withTestScope {
+            with(MainViewModelTestInstance) {
+                sendIntent(MainActivityUserIntent.LoadMap)
+                val state = state.value
+                val cache = Cache.get()
+                val expectedState = state.copy(
+                    cache = cache
+                )
+                state shouldBe expectedState
+            }
         }
     }
 }
