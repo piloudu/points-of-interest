@@ -1,5 +1,6 @@
 package com.example.pointsofinterest
 
+import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.view_model.MainActivityState
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModel
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 @DisplayName("The Mvi machine sets the state")
 class MviTest {
-    lateinit var MainViewModelTestInstance: MainViewModel
+    private lateinit var MainViewModelTestInstance: MainViewModel
 
     @BeforeEach
     fun init() {

@@ -1,5 +1,6 @@
 package com.example.pointsofinterest.view_model
 
+import com.example.pointsofinterest.get_data.CacheData
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
@@ -40,14 +41,17 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
 object MainViewModelInstance : MainViewModel()
 
 sealed class MainActivityUserIntent : UserIntent {
+    object LoadMap : MainActivityUserIntent()
 }
 
 data class MainActivityState(
     val innerState: AppState,
+    val cache: CacheData
 ) : UiState {
     companion object {
         fun initial() = MainActivityState(
-            innerState = AppState.LOADING
+            innerState = AppState.LOADING,
+            cache = CacheData()
         )
     }
 }
