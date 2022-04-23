@@ -1,4 +1,4 @@
-package com.example.map.resource.pointsofinterest.ui.theme
+package com.example.pointsofinterest.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

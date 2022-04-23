@@ -1,4 +1,4 @@
-package com.example.map.resource.pointsofinterest.utils
+package com.example.pointsofinterest.utils
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator

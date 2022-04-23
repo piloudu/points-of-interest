@@ -1,6 +1,6 @@
-package com.example.map.resource.pointsofinterest.view_model
+package com.example.pointsofinterest.view_model
 
-import com.example.map.resource.pointsofinterest.utils.withViewModelScope
+import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 

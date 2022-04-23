@@ -1,4 +1,4 @@
-package com.example.map.resource.pointsofinterest.view_model
+package com.example.pointsofinterest.view_model
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow

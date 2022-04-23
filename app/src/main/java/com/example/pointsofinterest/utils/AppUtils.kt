@@ -1,12 +1,12 @@
-package com.example.map.resource.pointsofinterest.utils
+package com.example.pointsofinterest.utils
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
-import com.example.map.resource.pointsofinterest.MainActivity
-import com.example.map.resource.pointsofinterest.view_model.MainViewModelInstance
+import com.example.pointsofinterest.MainActivity
+import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
