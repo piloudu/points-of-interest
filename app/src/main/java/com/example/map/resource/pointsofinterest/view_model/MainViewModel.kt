@@ -47,7 +47,7 @@ data class MainActivityState(
 ) : UiState {
     companion object {
         fun initial() = MainActivityState(
-            innerState = AppState.LOADING,
+            innerState = AppState.LOADING
         )
     }
 }

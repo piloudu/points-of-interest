@@ -8,12 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.example.map.resource.pointsofinterest.ui.theme.Purple700
 
 @Composable
 fun LoadingIndicator(
     modifier: Modifier = Modifier,
-    color: Color = Purple700
+    color: Color = Color.Black
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp

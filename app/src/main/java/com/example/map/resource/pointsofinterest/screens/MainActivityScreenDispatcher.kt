@@ -1,4 +1,4 @@
-package com.example.map.resource.map_resource_locator.screens
+package com.example.map.resource.pointsofinterest.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.map.resource.pointsofinterest.utils.LoadingIndicator
 import com.example.map.resource.pointsofinterest.view_model.AppState.*
 import com.example.map.resource.pointsofinterest.view_model.MainViewModelInstance
 
@@ -24,7 +25,7 @@ fun MainActivityScreenDispatcher(
         modifier = modifier
     ) {
         when (state.innerState) {
-            LOADING -> TODO()
+            LOADING -> LoadingIndicator()
             MAP, LIST -> TODO()
         }
     }
