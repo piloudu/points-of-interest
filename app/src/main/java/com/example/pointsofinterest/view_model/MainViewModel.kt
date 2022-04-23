@@ -1,6 +1,8 @@
 package com.example.pointsofinterest.view_model
 
+import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.CacheData
+import com.example.pointsofinterest.utils.toastMessage
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
@@ -16,20 +18,33 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
 
     fun sendIntent(userIntent: MainActivityUserIntent) {
         withViewModelScope(Dispatchers.Default) {
-            setStateCache()
             userIntent.action()
         }
         reducer.sendIntent(userIntent)
     }
 
-    private fun setStateCache() {
-        TODO()
-    }
 
     private class MainReducer(initialState: MainActivityState) :
         Reducer<MainActivityState, MainActivityUserIntent>(initialState) {
         override fun reduce(oldState: MainActivityState, userIntent: MainActivityUserIntent) {
-            when (userIntent) {
+            withViewModelScope {
+                when (userIntent) {
+                    MainActivityUserIntent.LoadMap -> setState(
+                        oldState.copy(
+                            innerState = AppState.MAP,
+                            cache = Cache.get()
+                        )
+                    )
+                }
+            }
+
+            fun getCache() {
+                val oldCache = oldState.cache
+                withViewModelScope {
+                    val newState = state.value.copy(cache = Cache.get())
+                    if (oldCache != MainViewModelInstance.state.value.cache)
+                        toastMessage("Data cached")
+                }
             }
         }
     }
@@ -41,6 +56,7 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
 object MainViewModelInstance : MainViewModel()
 
 sealed class MainActivityUserIntent : UserIntent {
+    object DownloadData : MainActivityUserIntent()
     object LoadMap : MainActivityUserIntent()
 }
 

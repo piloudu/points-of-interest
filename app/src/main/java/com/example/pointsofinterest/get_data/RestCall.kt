@@ -45,7 +45,12 @@ data class RestResult(val status: RestCall.RestStatus, val message: String) {
                 toastMessage(message)
             }
             false
-        } else true
+        } else {
+            withContext(Dispatchers.Main) {
+                toastMessage("Data cached")
+            }
+            true
+        }
     }
 }
 
