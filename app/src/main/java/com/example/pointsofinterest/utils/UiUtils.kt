@@ -3,6 +3,7 @@ package com.example.pointsofinterest.utils
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -124,7 +125,7 @@ fun TopDescriptionBar(
             Spacer(modifier = Modifier.width(65.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_map_marker),
-                contentDescription = "arrow"
+                contentDescription = "map marker"
             )
             Spacer(modifier = Modifier.width(5.dp))
             Text(
@@ -147,9 +148,41 @@ fun TopDescriptionBar(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_dots_lines_clipart),
-                contentDescription = "arrow"
+                contentDescription = "square list button"
             )
         }
+    }
+}
+
+@Preview(widthDp = 375)
+@Composable
+fun BottomBar(
+    modifier: Modifier = Modifier,
+    text: String = "MOSTRAR EN LISTADO",
+    @DrawableRes resId: Int = R.drawable.ic_lines_clipart
+) {
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(Gray)
+            .height(50.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            modifier = Modifier
+                .width(190.dp)
+                .padding(start = 21.dp, top = 15.dp, bottom = 12.dp),
+            text = text,
+            color = LightGray,
+            letterSpacing = 0.38.sp,
+            fontSize = 20.sp,
+            fontFamily = Gothics
+        )
+        Spacer(Modifier.width(138.dp))
+        Image(
+            painter = painterResource(id = R.drawable.ic_lines_clipart),
+            contentDescription = "list menu"
+        )
     }
 }
 
