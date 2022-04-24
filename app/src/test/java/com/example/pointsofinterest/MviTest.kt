@@ -1,7 +1,6 @@
 package com.example.pointsofinterest
 
 import com.example.pointsofinterest.get_data.Cache
-import com.example.pointsofinterest.get_data.CacheData
 import com.example.pointsofinterest.get_data.HttpUrls
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainActivityState
@@ -34,15 +33,17 @@ class MviTest {
     @DisplayName("on data downloaded")
     @Test
     fun `app innerState is set to MAP after downloading the data`() {
+        val url = HttpUrls.MAIN_DATA.string
         withTestScope {
             with(MainViewModelTestInstance) {
-                val state = state.value
-                val expectedState = state.copy(
+                val initialState = state.value
+                val expectedState = initialState.copy(
                     innerState = MAP,
-                    cache = Cache.get("")
+                    cache = Cache.get(url)
                 )
-                sendIntent(MainActivityUserIntent.LoadMap(""))
-                state shouldBe expectedState
+                sendIntent(MainActivityUserIntent.LoadMap(url))
+                val newState = MainViewModelTestInstance.state.value
+                newState shouldBe expectedState
             }
         }
     }

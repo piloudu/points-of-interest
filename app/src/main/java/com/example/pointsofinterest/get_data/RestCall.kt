@@ -1,5 +1,6 @@
 package com.example.pointsofinterest.get_data
 
+import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.utils.toastMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -27,7 +28,10 @@ object RestCall {
             Timber.e(e)
             RestResult(RestStatus.BAD_REQUEST, RestCallError.BAD_REQUEST.message)
         }
-        if (url.isNotEmpty()) getMessageFor(restResult.isSuccess(), restResult.message)
+        if (MainActivity.isContextInitialized()) getMessageFor(
+            restResult.isSuccess(),
+            restResult.message
+        )
         return restResult
     }
 

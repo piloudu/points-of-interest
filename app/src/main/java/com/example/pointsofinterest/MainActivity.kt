@@ -33,5 +33,8 @@ class MainActivity : ComponentActivity() {
     companion object {
         private lateinit var appContext: Context
         fun getContext() = appContext
+        fun isContextInitialized(): Boolean {
+            return ::appContext.isInitialized
+        }
     }
 }
