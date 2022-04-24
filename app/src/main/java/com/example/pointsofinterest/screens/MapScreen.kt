@@ -11,10 +11,9 @@ import com.example.pointsofinterest.ui.components.TopDescriptionBar
 import com.example.pointsofinterest.utils.initialCameraPosition
 import com.example.pointsofinterest.utils.madridLatLng
 import com.example.pointsofinterest.view_model.MainViewModelInstance
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.*
 
 @Composable
 fun MainScreen(
@@ -23,7 +22,7 @@ fun MainScreen(
     val state = MainViewModelInstance.state.collectAsState()
     val cameraPosition = rememberCameraPositionState { initialCameraPosition }
     GoogleMap(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         cameraPositionState = cameraPosition
     ) {
         if (!state.value.cache.dataModel.isEmpty())
