@@ -14,7 +14,8 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun MapScreen(
+fun MainScreen(
+    modifier: Modifier = Modifier
 ) {
     val state = MainViewModelInstance.state.collectAsState()
     val cameraPosition = rememberCameraPositionState { initialCameraPosition }

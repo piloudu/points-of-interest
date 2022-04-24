@@ -78,7 +78,8 @@ dependencies {
     implementation "androidx.compose.runtime:runtime:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
-
+    // To access the system Topbar personalization
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
 
     testImplementation 'io.kotest:kotest-runner-junit5:5.2.3'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'

@@ -1,6 +1,7 @@
 package com.example.pointsofinterest
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.pointsofinterest.screens.MainActivityScreenDispatcher
 import com.example.pointsofinterest.ui.theme.PointsOfInterestTheme
+import com.example.pointsofinterest.utils.LockScreenOrientation
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 
@@ -24,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED)
                     MainActivityScreenDispatcher()
                 }
             }

@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.pointsofinterest.utils.LoadingIndicator
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 
@@ -25,7 +24,7 @@ fun MainActivityScreenDispatcher(
         modifier = modifier
     ) {
         when (state.innerState) {
-            LOADING, MAP -> MapScreen()
+            LOADING, MAP -> MainScreen()
         }
     }
 }
