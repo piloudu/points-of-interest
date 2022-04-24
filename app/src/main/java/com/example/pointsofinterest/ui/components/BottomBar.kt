@@ -3,6 +3,7 @@ package com.example.pointsofinterest.ui.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +23,8 @@ import com.example.pointsofinterest.ui.theme.LightGray
 fun BottomBar(
     modifier: Modifier = Modifier,
     text: String = "MOSTRAR EN LISTADO",
-    @DrawableRes resId: Int = R.drawable.ic_lines_clipart
+    @DrawableRes resId: Int = R.drawable.ic_lines_clipart,
+    onClickAction: () -> Unit = {}
 ) {
     Row(
         modifier
@@ -41,8 +43,9 @@ fun BottomBar(
             fontSize = 20.sp,
             fontFamily = Gothics
         )
-        Spacer(Modifier.width(138.dp))
+        Spacer(Modifier.width(132.dp))
         Image(
+            modifier = modifier.clickable { onClickAction() },
             painter = painterResource(id = R.drawable.ic_lines_clipart),
             contentDescription = "list menu"
         )

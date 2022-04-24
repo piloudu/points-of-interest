@@ -27,7 +27,7 @@ fun TopBar(
         modifier = modifier
             .fillMaxWidth()
             .height(44.dp)
-            .padding(start = 15.dp, end = 15.dp, bottom = 13.dp)
+            .padding(start = 15.dp, bottom = 13.dp)
             .background(LightGray),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -56,6 +56,7 @@ fun TopBar(
         )
         Spacer(modifier = Modifier.width(5.dp))
         Image(
+            modifier = Modifier.size(32.dp),
             painter = painterResource(id = R.drawable.ic_arrow),
             contentDescription = "arrow"
         )
@@ -88,7 +89,7 @@ fun TopDescriptionBar(
                 fontSize = 22.sp,
                 fontFamily = Gothics
             )
-            Spacer(modifier = Modifier.width(65.dp))
+            Spacer(modifier = Modifier.width(120.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_map_marker),
                 contentDescription = "map marker"
