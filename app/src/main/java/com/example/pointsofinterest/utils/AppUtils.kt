@@ -37,7 +37,7 @@ fun toastMessage(message: String) {
     Toast.makeText(MainActivity.getContext(), message, Toast.LENGTH_SHORT).show()
 }
 
-const val defaultCameraZoom = 25f
+const val defaultCameraZoom = 13f
 val madridLatLng = LatLng(40.4148, -3.7008)
 val initialCameraPosition = CameraPosition.fromLatLngZoom(madridLatLng, defaultCameraZoom)
 
