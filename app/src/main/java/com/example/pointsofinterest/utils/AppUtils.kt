@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import com.example.pointsofinterest.MainActivity
+import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -23,10 +24,10 @@ import kotlinx.coroutines.launch
 val mapper: ObjectMapper =
     jacksonObjectMapper().enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 
-inline fun <reified T> String.deserialize(): T = mapper.readValue(
-    this,
-    object : TypeReference<T>() {}
-)
+inline fun <reified T> String.deserialize(): T = mapper
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .readerFor(DataModel::class.java)
+    .readValue(this)
 
 fun withViewModelScope(
     dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate,
