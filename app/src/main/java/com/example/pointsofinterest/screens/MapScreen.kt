@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.example.pointsofinterest.data_model.isEmpty
-import com.example.pointsofinterest.utils.TopBar
-import com.example.pointsofinterest.utils.TopDescriptionBar
+import com.example.pointsofinterest.ui.components.TopBar
+import com.example.pointsofinterest.ui.components.TopDescriptionBar
 import com.example.pointsofinterest.utils.initialCameraPosition
 import com.example.pointsofinterest.utils.madridLatLng
 import com.example.pointsofinterest.view_model.MainViewModelInstance
