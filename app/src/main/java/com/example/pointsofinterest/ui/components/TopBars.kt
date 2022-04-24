@@ -38,7 +38,7 @@ fun TopBar(
             painter = painterResource(id = R.drawable.ic_back_arrow),
             contentDescription = "back arrow"
         )
-        Spacer(modifier = Modifier.width(32.dp))
+        Spacer(modifier = Modifier.width(25.dp))
         Text(
             modifier = Modifier
                 .width(199.dp),
