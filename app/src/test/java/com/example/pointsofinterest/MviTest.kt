@@ -2,6 +2,7 @@ package com.example.pointsofinterest
 
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.CacheData
+import com.example.pointsofinterest.get_data.HttpUrls
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainActivityState
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
@@ -38,9 +39,9 @@ class MviTest {
                 val state = state.value
                 val expectedState = state.copy(
                     innerState = MAP,
-                    cache = Cache.get()
+                    cache = Cache.get("")
                 )
-                sendIntent(MainActivityUserIntent.LoadMap)
+                sendIntent(MainActivityUserIntent.LoadMap(""))
                 state shouldBe expectedState
             }
         }

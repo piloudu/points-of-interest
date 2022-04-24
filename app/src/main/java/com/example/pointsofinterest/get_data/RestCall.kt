@@ -10,10 +10,10 @@ import timber.log.Timber
 object RestCall {
     private val client = OkHttpClient()
 
-    suspend fun callFor(url: HttpUrls): RestResult {
+    suspend fun callFor(url: String): RestResult {
         val restResult = try {
             withContext(Dispatchers.IO) {
-                val request = Request.Builder().url(url.string).build()
+                val request = Request.Builder().url(url).build()
                 val result = client.newCall(request).execute().body?.string()
 
                 result?.let {
@@ -27,7 +27,7 @@ object RestCall {
             Timber.e(e)
             RestResult(RestStatus.BAD_REQUEST, RestCallError.BAD_REQUEST.message)
         }
-        getMessageFor(restResult.isSuccess(), restResult.message)
+        if (url.isNotEmpty()) getMessageFor(restResult.isSuccess(), restResult.message)
         return restResult
     }
 

@@ -6,15 +6,15 @@ import com.example.pointsofinterest.utils.deserialize
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 
 object Cache {
-    suspend fun get(): CacheData {
+    suspend fun get(url: String): CacheData {
         val cache = MainViewModelInstance.state.value.cache
         return if (cache.dataModel.isEmpty())
-            getNewCache()
+            getNewCache(url)
         else cache
     }
 
-    private suspend fun getNewCache(): CacheData {
-        val restResult = RestCall.callFor(HttpUrls.MAIN_DATA)
+    private suspend fun getNewCache(url: String): CacheData {
+        val restResult = RestCall.callFor(url)
 
         return if (restResult.isSuccess())
             CacheData(restResult.message.deserialize())

@@ -25,8 +25,7 @@ fun MainActivityScreenDispatcher(
         modifier = modifier
     ) {
         when (state.innerState) {
-            LOADING -> LoadingIndicator()
-            MAP, LIST -> TODO()
+            LOADING, MAP -> MapScreen()
         }
     }
 }
