@@ -16,14 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import com.example.pointsofinterest.R
-import com.example.pointsofinterest.ui.theme.DarkGray
-import com.example.pointsofinterest.ui.theme.LightGray
+import com.example.pointsofinterest.ui.theme.*
 
 @Composable
 fun LoadingIndicator(
@@ -52,6 +53,7 @@ fun LoadingIndicator(
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier.background(LightGray),
+    text: String = "MADRID",
     backAction: () -> Unit = {}
 ) {
     Row(
@@ -59,7 +61,8 @@ fun TopBar(
             .fillMaxWidth()
             .height(44.dp)
             .padding(start = 15.dp, end = 15.dp, bottom = 13.dp)
-            .background(LightGray)
+            .background(LightGray),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             modifier = Modifier.clickable {
@@ -72,11 +75,12 @@ fun TopBar(
         Text(
             modifier = Modifier
                 .width(199.dp),
-            text = "MADRID",
+            text = text,
             color = DarkGray,
             letterSpacing = 0.78.sp,
             lineHeight = 16.sp,
-            fontSize = 25.sp
+            fontSize = 25.sp,
+            fontFamily = Gothics
         )
         Spacer(modifier = Modifier.width(20.dp))
         Image(
@@ -88,6 +92,64 @@ fun TopBar(
             painter = painterResource(id = R.drawable.ic_arrow),
             contentDescription = "arrow"
         )
+    }
+}
+
+@Preview(widthDp = 375)
+@Composable
+fun TopDescriptionBar(
+    modifier: Modifier = Modifier.background(DarkGray1),
+    text: String = "LATINA - ÓPERA",
+    pois_count: Int = 118,
+    squareButtonColor: Color = Orange
+) {
+    Row(
+        modifier
+            .fillMaxWidth()
+            .height(50.dp)
+    ) {
+        Row(
+            modifier = modifier.width(325.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(top = 12.dp, start = 15.dp, bottom = 12.dp),
+                text = text,
+                color = White,
+                letterSpacing = 0.69.sp,
+                fontSize = 22.sp,
+                fontFamily = Gothics
+            )
+            Spacer(modifier = Modifier.width(65.dp))
+            Image(
+                painter = painterResource(id = R.drawable.ic_map_marker),
+                contentDescription = "arrow"
+            )
+            Spacer(modifier = Modifier.width(5.dp))
+            Text(
+                modifier = Modifier.width(42.dp),
+                text = pois_count.toString(),
+                maxLines = 1,
+                fontSize = 20.sp,
+                letterSpacing = 0.63.sp,
+                color = White,
+                fontFamily = Gothics
+            )
+            Spacer(modifier = Modifier.width(18.dp))
+        }
+        Box(
+            modifier = Modifier
+                .width(50.dp)
+                .fillMaxSize()
+                .background(squareButtonColor),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_dots_lines_clipart),
+                contentDescription = "arrow"
+            )
+        }
     }
 }
 
