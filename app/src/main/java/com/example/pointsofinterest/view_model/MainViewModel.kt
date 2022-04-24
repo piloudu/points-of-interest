@@ -1,11 +1,13 @@
 package com.example.pointsofinterest.view_model
 
+import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.CacheData
 import com.example.pointsofinterest.get_data.HttpUrls
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
+import okhttp3.internal.wait
 
 /**
  * MainViewModel is not made a singleton in order for tests to be able to instance a new object
@@ -37,12 +39,13 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
         private fun setMapState(oldState: MainActivityState, url: String) {
             lateinit var cache: CacheData
             withViewModelScope(Dispatchers.IO) {
-                cache = Cache.get(url)
+                cache = Cache.get(HttpUrls.MAIN_DATA.string)
             }.invokeOnCompletion {
                 setState(
                     oldState.copy(
                         innerState = AppState.MAP,
-                        cache = cache
+                        cache = CacheData(DataModel.initial().copy(name = "Test"))
+                        //cache = cache
                     )
                 )
             }
