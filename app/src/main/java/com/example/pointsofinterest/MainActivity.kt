@@ -10,10 +10,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.pointsofinterest.screens.MainActivityScreenDispatcher
+import com.example.pointsofinterest.ui.theme.LightGray
 import com.example.pointsofinterest.ui.theme.PointsOfInterestTheme
 import com.example.pointsofinterest.utils.LockScreenOrientation
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    // Set the system top bar color
+                    val systemUiController = rememberSystemUiController()
+                    systemUiController.setSystemBarsColor(LightGray)
+
                     LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED)
                     MainActivityScreenDispatcher()
                 }

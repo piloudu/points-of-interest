@@ -49,7 +49,7 @@ fun LoadingIndicator(
     }
 }
 
-@Preview
+@Preview(widthDp = 375)
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier.background(LightGray),

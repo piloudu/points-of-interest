@@ -1,10 +1,13 @@
 package com.example.pointsofinterest.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.example.pointsofinterest.data_model.isEmpty
+import com.example.pointsofinterest.utils.TopBar
+import com.example.pointsofinterest.utils.TopDescriptionBar
 import com.example.pointsofinterest.utils.initialCameraPosition
 import com.example.pointsofinterest.utils.madridLatLng
 import com.example.pointsofinterest.view_model.MainViewModelInstance
@@ -19,13 +22,16 @@ fun MainScreen(
 ) {
     val state = MainViewModelInstance.state.collectAsState()
     val cameraPosition = rememberCameraPositionState { initialCameraPosition }
-    GoogleMap(
-        Modifier.fillMaxSize(),
-        cameraPositionState = cameraPosition
-    ) {
-        if (!state.value.cache.dataModel.isEmpty())
-            Marker(
-                state = MarkerState(position = madridLatLng)
-            )
+    Column(modifier.fillMaxSize()) {
+        TopBar()
+        TopDescriptionBar()
+        GoogleMap(
+            cameraPositionState = cameraPosition
+        ) {
+            if (!state.value.cache.dataModel.isEmpty())
+                Marker(
+                    state = MarkerState(position = madridLatLng)
+                )
+        }
     }
 }
