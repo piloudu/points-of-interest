@@ -25,4 +25,4 @@ data class Poi(
     val likesCount: Int
 )
 
-fun DataModel.isEmpty() = this != DataModel.initial()
+fun DataModel.isEmpty() = this == DataModel.initial()

@@ -16,6 +16,7 @@ import com.example.pointsofinterest.view_model.MainViewModelInstance
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap)
         appContext = applicationContext
         setContent {
             PointsOfInterestTheme {

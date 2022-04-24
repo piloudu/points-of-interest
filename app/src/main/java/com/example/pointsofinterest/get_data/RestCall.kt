@@ -27,31 +27,28 @@ object RestCall {
             Timber.e(e)
             RestResult(RestStatus.BAD_REQUEST, RestCallError.BAD_REQUEST.message)
         }
-        restResult.isSuccess()
+        getMessageFor(restResult.isSuccess(), restResult.message)
         return restResult
     }
 
     enum class RestStatus {
         SUCCESS, NULL_REST_CALL_BODY, BAD_REQUEST
     }
+
+    private suspend fun getMessageFor(success: Boolean, message: String) {
+        withContext(Dispatchers.Main) {
+            if (success) toastMessage("Data cached")
+            else {
+                Timber.e(message)
+                toastMessage(message)
+            }
+        }
+    }
 }
 
 data class RestResult(val status: RestCall.RestStatus, val message: String) {
 
-    suspend fun isSuccess(): Boolean {
-        return if (status != RestCall.RestStatus.SUCCESS) {
-            Timber.e(message)
-            withContext(Dispatchers.Main) {
-                toastMessage(message)
-            }
-            false
-        } else {
-            withContext(Dispatchers.Main) {
-                toastMessage("Data cached")
-            }
-            true
-        }
-    }
+    fun isSuccess() = status == RestCall.RestStatus.SUCCESS
 }
 
 /**
