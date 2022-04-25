@@ -1,7 +1,6 @@
 package com.example.pointsofinterest.get_data
 
 import com.example.pointsofinterest.data_model.DataModel
-import com.example.pointsofinterest.data_model.Poi
 import com.example.pointsofinterest.data_model.isEmpty
 import com.example.pointsofinterest.utils.deserialize
 import com.example.pointsofinterest.view_model.MainViewModelInstance
@@ -20,7 +19,7 @@ object Cache {
         val result = if (restResult.isSuccess())
             CacheData(restResult.message.deserialize())
         else CacheData()
-        println("Result: " + (result.dataModel.pois[0].url))
+        println("Result: " + result.dataModel.pois)
         return result
     }
 }

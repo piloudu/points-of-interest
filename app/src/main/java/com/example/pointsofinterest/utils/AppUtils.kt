@@ -8,26 +8,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.view_model.MainViewModelInstance
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-val mapper: ObjectMapper =
-    jacksonObjectMapper().enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-
-inline fun <reified T> String.deserialize(): T = mapper
-    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    .readerFor(DataModel::class.java)
-    .readValue(this)
+inline fun <reified T> String.deserialize(): T = Gson().fromJson(this, T::class.java)
 
 fun withViewModelScope(
     dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate,

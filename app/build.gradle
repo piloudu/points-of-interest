@@ -69,8 +69,8 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
     // HTTP REST client
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-    // Jackson deserializer
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0'
+    // Gson deserializer
+    implementation 'com.google.code.gson:gson:2.8.9'
     // Google Maps
     implementation  "com.google.maps.android:maps-compose:2.1.0"
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
@@ -86,7 +86,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.2.0-alpha08"
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$testing_version"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     androidTestImplementation 'io.kotest:kotest-runner-junit5:5.2.3'
     androidTestImplementation 'junit:junit:4.13.2'
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
