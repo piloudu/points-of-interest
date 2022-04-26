@@ -12,6 +12,14 @@ val Gothics = FontFamily(
     Font(R.font.gothics)
 )
 
+val RobotoLight = FontFamily(
+    Font(R.font.roboto_light)
+)
+
+val RobotoMedium = FontFamily(
+    Font(R.font.roboto_medium)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,

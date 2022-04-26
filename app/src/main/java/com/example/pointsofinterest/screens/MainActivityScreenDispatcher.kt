@@ -35,7 +35,7 @@ fun MainActivityScreenDispatcher(
             )
             when (state.value.innerState) {
                 LOADING, MAP -> MainScreen()
-                LIST -> TODO()
+                LIST -> ListScreen()
             }
         }
         Column(
