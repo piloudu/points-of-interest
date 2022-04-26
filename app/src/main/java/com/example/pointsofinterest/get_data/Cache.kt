@@ -15,9 +15,9 @@ object Cache {
 
     private suspend fun getNewCache(url: String): CacheData {
         val restResult = RestCall.callFor(url)
+        val deserializedDataStructure = restResult.message.deserialize<DeserializedDataStructure>()
 
-        return if (restResult.isSuccess())
-            CacheData(restResult.message.deserialize())
+        return if (restResult.isSuccess()) deserializedDataStructure.toCache()
         else CacheData()
     }
 }

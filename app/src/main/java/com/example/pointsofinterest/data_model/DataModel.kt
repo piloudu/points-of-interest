@@ -1,6 +1,5 @@
 package com.example.pointsofinterest.data_model
 
-import com.example.pointsofinterest.get_data.DeserializedDataStructure
 import com.google.android.gms.maps.model.LatLng
 import java.net.URL
 

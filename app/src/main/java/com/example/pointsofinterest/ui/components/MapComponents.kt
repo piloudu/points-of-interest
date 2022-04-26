@@ -1,6 +1,7 @@
 package com.example.pointsofinterest.ui.components
 
 import androidx.compose.runtime.Composable
+import com.example.pointsofinterest.data_model.Poi
 import com.example.pointsofinterest.get_data.DeserializedPoi
 import com.example.pointsofinterest.ui.theme.OrangeTransparent
 import com.example.pointsofinterest.ui.theme.White
@@ -28,16 +29,14 @@ fun MapPolygon(
 
 @Composable
 fun DrawMarkers(
-    pois: List<DeserializedPoi>
+    pois: List<Poi>
 ) {
     pois.forEach {
-        val position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
-        val url = URL(it.category.marker.url.replace("http", "https"))
         Marker(
             state = MarkerState(
-                position = position
+                position = it.position
             ),
-            icon = BitmapDescriptorFactory.fromBitmap(url.downloadImage())
+            //icon = BitmapDescriptorFactory.fromBitmap(it.markerURL.downloadImage())
         )
     }
 }
