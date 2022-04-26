@@ -20,7 +20,7 @@ fun MainScreen(
     val resources = MainActivity.getContext().resources
     val state = MainViewModelInstance.state.collectAsState()
     val cache = state.value.cache
-    val cameraPosition = rememberCameraPositionState { initialCameraPosition }
+    val cameraPosition = rememberCameraPositionState { position = initialCameraPosition }
 
     GoogleMap(
         modifier = modifier.fillMaxSize(),
