@@ -53,7 +53,7 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
             )
         )
     }
-    toastMessage("Data downloaded")
+    toastMessage("Datos descargados")
     return CacheData(
         DataModel(
             name = name,

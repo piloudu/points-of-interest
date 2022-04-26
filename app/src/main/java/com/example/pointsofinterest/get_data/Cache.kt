@@ -19,7 +19,7 @@ object Cache {
         val deserializedDataStructure = restResult.message.deserialize<DeserializedDataStructure>()
 
         return if (restResult.isSuccess()) {
-            toastMessage("Downloading data")
+            toastMessage("Descargando datos")
             deserializedDataStructure.toCache()
         } else
             CacheData()

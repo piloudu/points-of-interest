@@ -22,31 +22,18 @@ fun MainScreen(
     val cache = state.value.cache
     val cameraPosition = rememberCameraPositionState { initialCameraPosition }
 
-    Column {
-        TopBar()
-        TopDescriptionBar(
-            text = cache.dataModel.name,
-            pois_count = cache.dataModel.poisCount
-        )
-        GoogleMap(
-            modifier = modifier.fillMaxSize(),
-            cameraPositionState = cameraPosition,
-            uiSettings = MapUiSettings(zoomControlsEnabled = false),
-            properties = MapProperties(mapStyleOptions = MapStyleOptions(
-                resources.openRawResource(R.raw.maps_config).bufferedReader().use { it.readText() }
-            ))
-        ) {
-            if (!state.value.cache.dataModel.isEmpty()) {
-                val polygonPoints = cache.dataModel.coordinates
-                MapPolygon(points = polygonPoints)
-                DrawMarkers(cache.dataModel.pois)
-            }
-        }
-    }
-    Column(
-        modifier = Modifier.fillMaxHeight(),
-        verticalArrangement = Arrangement.Bottom
+    GoogleMap(
+        modifier = modifier.fillMaxSize(),
+        cameraPositionState = cameraPosition,
+        uiSettings = MapUiSettings(zoomControlsEnabled = false),
+        properties = MapProperties(mapStyleOptions = MapStyleOptions(
+            resources.openRawResource(R.raw.maps_config).bufferedReader().use { it.readText() }
+        ))
     ) {
-        BottomBar()
+        if (!state.value.cache.dataModel.isEmpty()) {
+            val polygonPoints = cache.dataModel.coordinates
+            MapPolygon(points = polygonPoints)
+            DrawMarkers(cache.dataModel.pois)
+        }
     }
 }

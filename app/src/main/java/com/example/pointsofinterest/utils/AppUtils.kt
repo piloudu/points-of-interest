@@ -1,15 +1,11 @@
 package com.example.pointsofinterest.utils
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.view_model.MainViewModelInstance
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
@@ -24,9 +20,10 @@ fun withViewModelScope(
 ) = MainViewModelInstance.viewModelScope.launch(dispatcher) { execute() }
 
 suspend fun toastMessage(message: String) {
-    withContext(Dispatchers.Main) {
-        Toast.makeText(MainActivity.getContext(), message, Toast.LENGTH_SHORT).show()
-    }
+    if (MainActivity.isContextInitialized())
+        withContext(Dispatchers.Main) {
+            Toast.makeText(MainActivity.getContext(), message, Toast.LENGTH_SHORT).show()
+        }
 }
 
 const val defaultCameraZoom = 15f
@@ -45,4 +42,13 @@ fun String.toLatLng(): List<LatLng> {
         )
     }
     return latLngList.toList()
+}
+
+suspend fun URL.downloadImage(): Bitmap {
+    return withContext(Dispatchers.IO) {
+        val result =
+            BitmapFactory.decodeStream(this@downloadImage.openConnection().getInputStream())
+        println("Downloaded!")
+        result
+    }
 }
