@@ -1,5 +1,7 @@
 package com.example.pointsofinterest.get_data
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.example.pointsofinterest.MainActivity
@@ -72,11 +74,14 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
     )
 }
 
-private suspend fun getImages(url: String, poiId: String, type: String): Bitmap {
+private suspend fun getImage(url: String, poiId: Int, type: String): Bitmap {
     if (!MainActivity.isContextInitialized()) throw Exception("App context is not initialized")
     val context = MainActivity.getContext()
+    val cw = ContextWrapper(context)
+    val imagesDirPath = context.applicationInfo.dataDir + "/images"
+    val directory = cw.getDir("images", Context.MODE_PRIVATE)
 
-    File(context.applicationInfo.dataDir + "/images").walk().forEach {
+    if (directory.exists()) File(imagesDirPath).walk().forEach {
         if (it.name == "$type-$poiId.png")
             return BitmapFactory.decodeFile(it.path)
     }

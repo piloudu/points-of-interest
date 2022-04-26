@@ -60,13 +60,13 @@ suspend fun URL.downloadImage(): Bitmap {
     }
 }
 
-suspend fun Bitmap.saveToDevice(poiId: String, type: String) {
+suspend fun Bitmap.saveToDevice(poiId: Int, type: String) {
     if (!MainActivity.isContextInitialized()) return
     val context = MainActivity.getContext()
     val cw = ContextWrapper(context)
 
     withContext(Dispatchers.IO) {
-        val directory = cw.getDir(context.applicationInfo.dataDir + "/images", Context.MODE_PRIVATE)
+        val directory = cw.getDir("images", Context.MODE_PRIVATE)
         if (!directory.exists()) directory.mkdir()
         val file = File(directory, "$type-$poiId.png")
 
