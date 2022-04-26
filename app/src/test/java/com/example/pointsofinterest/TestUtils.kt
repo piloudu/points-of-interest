@@ -1,7 +1,5 @@
 package com.example.pointsofinterest
 
-import com.example.pointsofinterest.data_model.DataModel
-import com.example.pointsofinterest.data_model.Poi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

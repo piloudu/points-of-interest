@@ -2,11 +2,11 @@ package com.example.pointsofinterest.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import com.example.pointsofinterest.MainActivity
-import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -17,6 +17,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.URL
 
 inline fun <reified T> String.deserialize(): T = Gson().fromJson(this, T::class.java)
 
@@ -66,3 +67,5 @@ fun bitmapDescriptorFromVector(
     drawable.draw(canvas)
     return BitmapDescriptorFactory.fromBitmap(bm)
 }
+
+fun URL.downloadImage(): Bitmap = BitmapFactory.decodeStream(this.openConnection().getInputStream())

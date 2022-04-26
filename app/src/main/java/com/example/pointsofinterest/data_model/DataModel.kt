@@ -1,42 +1,31 @@
 package com.example.pointsofinterest.data_model
 
-import com.google.gson.annotations.SerializedName
+import com.example.pointsofinterest.get_data.DeserializedDataStructure
+import com.google.android.gms.maps.model.LatLng
+import java.net.URL
 
 data class DataModel(
     val name: String,
     val pois: List<Poi>,
-    @SerializedName("pois_count") val poisCount: Int,
-    val coordinates: String,
+    val poisCount: Int,
+    val coordinates: List<LatLng>
 ) {
     companion object {
         fun initial() = DataModel(
             name = "",
-            pois = mutableListOf(),
+            pois = emptyList(),
             poisCount = 0,
-            coordinates = ""
+            coordinates = emptyList()
         )
     }
 }
 
 data class Poi(
-    val latitude: String,
-    val longitude: String,
     val name: String,
-    val image: Image,
-    val category: Category,
-    var likesCount: Int
-)
-
-data class Image(
-    val url: String
-)
-
-data class Category(
-    val marker: Marker
-)
-
-data class Marker(
-    val url: String
+    val position: LatLng,
+    val imageUrl: URL,
+    val markerURL: URL,
+    val likesCount: Int
 )
 
 fun DataModel.isEmpty() = this == DataModel.initial()
