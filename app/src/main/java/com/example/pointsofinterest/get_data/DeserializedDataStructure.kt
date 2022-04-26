@@ -4,6 +4,7 @@ import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.data_model.Poi
 import com.example.pointsofinterest.utils.downloadImage
 import com.example.pointsofinterest.utils.toLatLng
+import com.example.pointsofinterest.utils.toastMessage
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
 import java.net.URL
@@ -52,6 +53,7 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
             )
         )
     }
+    toastMessage("Data downloaded")
     return CacheData(
         DataModel(
             name = name,

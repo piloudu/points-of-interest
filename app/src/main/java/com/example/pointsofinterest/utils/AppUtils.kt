@@ -23,8 +23,10 @@ fun withViewModelScope(
     execute: suspend CoroutineScope.() -> Unit
 ) = MainViewModelInstance.viewModelScope.launch(dispatcher) { execute() }
 
-fun toastMessage(message: String) {
-    Toast.makeText(MainActivity.getContext(), message, Toast.LENGTH_SHORT).show()
+suspend fun toastMessage(message: String) {
+    withContext(Dispatchers.Main) {
+        Toast.makeText(MainActivity.getContext(), message, Toast.LENGTH_SHORT).show()
+    }
 }
 
 const val defaultCameraZoom = 15f
@@ -43,32 +45,4 @@ fun String.toLatLng(): List<LatLng> {
         )
     }
     return latLngList.toList()
-}
-
-fun bitmapDescriptorFromVector(
-    context: Context,
-    vectorResId: Int
-): BitmapDescriptor? {
-
-    // get drawable from resources and create e Bitmap for it
-    val drawable = ContextCompat.getDrawable(context, vectorResId) ?: return null
-    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
-    val bm = Bitmap.createBitmap(
-        drawable.intrinsicWidth,
-        drawable.intrinsicHeight,
-        Bitmap.Config.ARGB_8888
-    )
-
-    // create a BitmapDescriptor with it
-    val canvas = android.graphics.Canvas(bm)
-    drawable.draw(canvas)
-    return BitmapDescriptorFactory.fromBitmap(bm)
-}
-
-suspend fun URL.downloadImage(): Bitmap {
-    return withContext(Dispatchers.IO) {
-        val result = BitmapFactory.decodeStream(this@downloadImage.openConnection().getInputStream())
-        println("Downloaded!")
-        result
-    }
 }

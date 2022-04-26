@@ -40,12 +40,10 @@ object RestCall {
     }
 
     private suspend fun getMessageFor(success: Boolean, message: String) {
-        withContext(Dispatchers.Main) {
-            if (success) toastMessage("Data cached")
-            else {
-                Timber.e(message)
-                toastMessage(message)
-            }
+        if (success) Timber.d("REST call succeed!")
+        else {
+            Timber.e(message)
+            toastMessage(message)
         }
     }
 }
