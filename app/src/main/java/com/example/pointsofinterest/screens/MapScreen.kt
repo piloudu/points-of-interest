@@ -12,7 +12,6 @@ import com.example.pointsofinterest.ui.components.MapPolygon
 import com.example.pointsofinterest.ui.components.TopBar
 import com.example.pointsofinterest.ui.components.TopDescriptionBar
 import com.example.pointsofinterest.utils.initialCameraPosition
-import com.example.pointsofinterest.utils.madridLatLng
 import com.example.pointsofinterest.utils.toLatLng
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -44,9 +43,6 @@ fun MainScreen(
             if (!state.value.cache.dataModel.isEmpty()) {
                 val polygonPoints = cache.dataModel.coordinates.toLatLng()
                 MapPolygon(points = polygonPoints)
-                Marker(
-                    state = MarkerState(position = madridLatLng)
-                )
             }
         }
     }

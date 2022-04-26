@@ -22,8 +22,13 @@ data class Poi(
     val latitude: String,
     val longitude: String,
     val name: String,
+    val image: Image,
     val category: Category,
     var likesCount: Int
+)
+
+data class Image(
+    val url: String
 )
 
 data class Category(
