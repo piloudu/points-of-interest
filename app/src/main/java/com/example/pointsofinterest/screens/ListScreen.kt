@@ -26,18 +26,20 @@ fun ListScreen(
     modifier: Modifier = Modifier,
     dataModel: DataModel = DataModel.initial()
 ) {
-    LazyColumn {
-        item {
-            ListHeader()
-        }
-        itemsIndexed(dataModel.pois) { _: Int, poi: Poi ->
-            with(poi) {
-                ListElement(
-                    imageId = id,
-                    image = image,
-                    likesCount = likesCount,
-                    text = name
-                )
+    Column {
+        ListHeader()
+        LazyColumn {
+            item {
+            }
+            itemsIndexed(dataModel.pois) { _: Int, poi: Poi ->
+                with(poi) {
+                    ListElement(
+                        imageId = id,
+                        image = image,
+                        likesCount = likesCount,
+                        text = name
+                    )
+                }
             }
         }
     }

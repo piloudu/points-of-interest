@@ -38,14 +38,12 @@ fun MainActivityScreenDispatcher(
                 pois_count = cache.dataModel.poisCount,
             )
             when (state.value.innerState) {
-                LOADING, MAP -> MainScreen()
-                LIST -> ListScreen(dataModel = cache.dataModel)
+                LOADING, MAP -> MainScreen(modifier = Modifier.weight(1f))
+                LIST -> ListScreen(
+                    modifier = Modifier.weight(1f),
+                    dataModel = cache.dataModel
+                )
             }
-        }
-        Column(
-            modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.Bottom
-        ) {
             BottomBar(
                 onClickAction = {
                     MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadList)
