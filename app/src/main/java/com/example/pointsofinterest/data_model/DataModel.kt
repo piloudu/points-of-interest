@@ -3,10 +3,10 @@ package com.example.pointsofinterest.data_model
 import com.google.gson.annotations.SerializedName
 
 data class DataModel(
-    val name: String?,
-    val pois: List<Poi>?,
-    @SerializedName("pois_count") val poisCount: Int?,
-    val coordinates: String?
+    val name: String,
+    val pois: List<Poi>,
+    @SerializedName("pois_count") val poisCount: Int,
+    val coordinates: String,
 ) {
     companion object {
         fun initial() = DataModel(

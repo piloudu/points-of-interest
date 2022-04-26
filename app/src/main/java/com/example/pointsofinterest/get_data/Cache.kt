@@ -19,7 +19,6 @@ object Cache {
         val result = if (restResult.isSuccess())
             CacheData(restResult.message.deserialize())
         else CacheData()
-        println("Result: " + result.dataModel.pois)
         return result
     }
 }

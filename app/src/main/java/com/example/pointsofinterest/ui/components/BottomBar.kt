@@ -30,7 +30,8 @@ fun BottomBar(
         modifier
             .fillMaxWidth()
             .background(Gray)
-            .height(50.dp),
+            .height(50.dp)
+            .clickable { onClickAction() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -45,7 +46,6 @@ fun BottomBar(
         )
         Spacer(Modifier.width(132.dp))
         Image(
-            modifier = modifier.clickable { onClickAction() },
             painter = painterResource(id = R.drawable.ic_lines_clipart),
             contentDescription = "list menu"
         )

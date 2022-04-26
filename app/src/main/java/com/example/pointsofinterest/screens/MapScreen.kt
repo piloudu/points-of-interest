@@ -22,23 +22,27 @@ fun MainScreen(
 ) {
     val resources = MainActivity.getContext().resources
     val state = MainViewModelInstance.state.collectAsState()
+    val cache = state.value.cache
     val cameraPosition = rememberCameraPositionState { initialCameraPosition }
-    GoogleMap(
-        modifier = modifier.fillMaxSize(),
-        cameraPositionState = cameraPosition,
-        uiSettings = MapUiSettings(zoomControlsEnabled = false),
-        properties = MapProperties(mapStyleOptions = MapStyleOptions(
-            resources.openRawResource(R.raw.maps_config).bufferedReader().use { it.readText() }
-        ))
-    ) {
-        if (!state.value.cache.dataModel.isEmpty())
-            Marker(
-                state = MarkerState(position = madridLatLng)
-            )
-    }
     Column {
         TopBar()
-        TopDescriptionBar()
+        TopDescriptionBar(
+            text = cache.dataModel.name,
+            pois_count = cache.dataModel.poisCount
+        )
+        GoogleMap(
+            modifier = modifier.fillMaxSize(),
+            cameraPositionState = cameraPosition,
+            uiSettings = MapUiSettings(zoomControlsEnabled = false),
+            properties = MapProperties(mapStyleOptions = MapStyleOptions(
+                resources.openRawResource(R.raw.maps_config).bufferedReader().use { it.readText() }
+            ))
+        ) {
+            if (!state.value.cache.dataModel.isEmpty())
+                Marker(
+                    state = MarkerState(position = madridLatLng)
+                )
+        }
     }
     Column(
         modifier = Modifier.fillMaxHeight(),

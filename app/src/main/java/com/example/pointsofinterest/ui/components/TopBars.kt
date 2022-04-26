@@ -82,6 +82,7 @@ fun TopDescriptionBar(
         ) {
             Text(
                 modifier = Modifier
+                    .weight(4.5f)
                     .padding(top = 12.dp, start = 15.dp, bottom = 12.dp),
                 text = text,
                 color = White,
@@ -89,22 +90,23 @@ fun TopDescriptionBar(
                 fontSize = 22.sp,
                 fontFamily = Gothics
             )
-            Spacer(modifier = Modifier.width(120.dp))
-            Image(
-                painter = painterResource(id = R.drawable.ic_map_marker),
-                contentDescription = "map marker"
-            )
-            Spacer(modifier = Modifier.width(5.dp))
-            Text(
-                modifier = Modifier.width(42.dp),
-                text = pois_count.toString(),
-                maxLines = 1,
-                fontSize = 20.sp,
-                letterSpacing = 0.63.sp,
-                color = White,
-                fontFamily = Gothics
-            )
-            Spacer(modifier = Modifier.width(18.dp))
+            Row(modifier = Modifier.weight(1f)) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_map_marker),
+                    contentDescription = "map marker"
+                )
+                Spacer(modifier = Modifier.width(5.dp))
+                Text(
+                    modifier = Modifier.width(42.dp),
+                    text = pois_count.toString(),
+                    maxLines = 1,
+                    fontSize = 20.sp,
+                    letterSpacing = 0.63.sp,
+                    color = White,
+                    fontFamily = Gothics
+                )
+                Spacer(modifier = Modifier.width(18.dp))
+            }
         }
         Box(
             modifier = Modifier
