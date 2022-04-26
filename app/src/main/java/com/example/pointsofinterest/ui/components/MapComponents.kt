@@ -2,7 +2,6 @@ package com.example.pointsofinterest.ui.components
 
 import androidx.compose.runtime.Composable
 import com.example.pointsofinterest.data_model.Poi
-import com.example.pointsofinterest.get_data.DeserializedPoi
 import com.example.pointsofinterest.ui.theme.OrangeTransparent
 import com.example.pointsofinterest.ui.theme.White
 import com.example.pointsofinterest.utils.downloadImage
@@ -12,7 +11,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.Polygon
-import java.net.URL
 
 @Composable
 fun MapPolygon(
@@ -36,7 +34,7 @@ fun DrawMarkers(
             state = MarkerState(
                 position = it.position
             ),
-            //icon = BitmapDescriptorFactory.fromBitmap(it.markerURL.downloadImage())
+            icon = BitmapDescriptorFactory.fromBitmap(it.marker)
         )
     }
 }

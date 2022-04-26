@@ -2,6 +2,7 @@ package com.example.pointsofinterest.get_data
 
 import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.data_model.Poi
+import com.example.pointsofinterest.utils.downloadImage
 import com.example.pointsofinterest.utils.toLatLng
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
@@ -35,16 +36,18 @@ data class Marker(
     val url: String
 )
 
-fun DeserializedDataStructure.toCache(): CacheData {
+suspend fun DeserializedDataStructure.toCache(): CacheData {
     val latLngCoordinates: List<LatLng> = coordinates.toLatLng()
     val pois = mutableListOf<Poi>()
     this.deserializedPois.forEach {
+        val image = URL(it.image.url).downloadImage()
+        val marker = URL(it.category.marker.url).downloadImage()
         pois.add(
             Poi(
                 name = it.name,
                 position = LatLng(it.latitude.toDouble(), it.longitude.toDouble()),
-                imageUrl = URL(it.image.url.replace("http:", "https:")),
-                markerURL = URL(it.category.marker.url.replace("http:", "https:")),
+                image = image,
+                marker = marker,
                 likesCount = it.likesCount
             )
         )

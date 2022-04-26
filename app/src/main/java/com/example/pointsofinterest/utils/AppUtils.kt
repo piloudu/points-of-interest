@@ -13,10 +13,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.URL
 
 inline fun <reified T> String.deserialize(): T = Gson().fromJson(this, T::class.java)
@@ -68,4 +65,10 @@ fun bitmapDescriptorFromVector(
     return BitmapDescriptorFactory.fromBitmap(bm)
 }
 
-fun URL.downloadImage(): Bitmap = BitmapFactory.decodeStream(this.openConnection().getInputStream())
+suspend fun URL.downloadImage(): Bitmap {
+    return withContext(Dispatchers.IO) {
+        val result = BitmapFactory.decodeStream(this@downloadImage.openConnection().getInputStream())
+        println("Downloaded!")
+        result
+    }
+}

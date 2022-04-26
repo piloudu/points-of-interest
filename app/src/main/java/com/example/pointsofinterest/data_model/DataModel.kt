@@ -1,7 +1,7 @@
 package com.example.pointsofinterest.data_model
 
+import android.graphics.Bitmap
 import com.google.android.gms.maps.model.LatLng
-import java.net.URL
 
 data class DataModel(
     val name: String,
@@ -22,8 +22,8 @@ data class DataModel(
 data class Poi(
     val name: String,
     val position: LatLng,
-    val imageUrl: URL,
-    val markerURL: URL,
+    val image: Bitmap,
+    val marker: Bitmap,
     val likesCount: Int
 )
 
