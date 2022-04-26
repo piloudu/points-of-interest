@@ -1,12 +1,18 @@
 package com.example.pointsofinterest.get_data
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.data_model.Poi
 import com.example.pointsofinterest.utils.downloadImage
+import com.example.pointsofinterest.utils.saveToDevice
 import com.example.pointsofinterest.utils.toLatLng
 import com.example.pointsofinterest.utils.toastMessage
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
+import java.io.File
+import java.lang.Exception
 import java.net.URL
 
 data class DeserializedDataStructure(
@@ -19,6 +25,7 @@ data class DeserializedDataStructure(
 data class DeserializedPoi(
     val latitude: String,
     val longitude: String,
+    val id: Int,
     val name: String,
     val image: Image,
     val category: Category,
@@ -47,6 +54,7 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
             Poi(
                 name = it.name,
                 position = LatLng(it.latitude.toDouble(), it.longitude.toDouble()),
+                id = it.id,
                 image = image,
                 marker = marker,
                 likesCount = it.likesCount
@@ -62,4 +70,17 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
             coordinates = latLngCoordinates
         )
     )
+}
+
+private suspend fun getImages(url: String, poiId: String, type: String): Bitmap {
+    if (!MainActivity.isContextInitialized()) throw Exception("App context is not initialized")
+    val context = MainActivity.getContext()
+
+    File(context.applicationInfo.dataDir + "/images").walk().forEach {
+        if (it.name == "$type-$poiId.png")
+            return BitmapFactory.decodeFile(it.path)
+    }
+    val image = URL(url).downloadImage()
+    image.saveToDevice(poiId, type)
+    return image
 }

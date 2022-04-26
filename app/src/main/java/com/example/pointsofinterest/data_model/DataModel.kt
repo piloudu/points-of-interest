@@ -21,6 +21,7 @@ data class DataModel(
 
 data class Poi(
     val name: String,
+    val id: Int,
     val position: LatLng,
     val image: Bitmap,
     val marker: Bitmap,

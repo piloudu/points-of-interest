@@ -11,6 +11,7 @@ import com.example.pointsofinterest.ui.components.BottomBar
 import com.example.pointsofinterest.ui.components.TopBar
 import com.example.pointsofinterest.ui.components.TopDescriptionBar
 import com.example.pointsofinterest.view_model.AppState.*
+import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 
 val modifier = Modifier
@@ -41,7 +42,12 @@ fun MainActivityScreenDispatcher(
             modifier = Modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.Bottom
         ) {
-            BottomBar()
+            BottomBar(
+                goBackAction = {
+                    if (state.value.innerState == LIST)
+                        MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap())
+                }
+            )
         }
     }
 }

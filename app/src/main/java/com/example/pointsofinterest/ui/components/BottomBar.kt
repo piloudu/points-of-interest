@@ -24,14 +24,14 @@ fun BottomBar(
     modifier: Modifier = Modifier,
     text: String = "MOSTRAR EN LISTADO",
     @DrawableRes resId: Int = R.drawable.ic_lines_clipart,
-    onClickAction: () -> Unit = {}
+    goBackAction: () -> Unit = {}
 ) {
     Row(
         modifier
             .fillMaxWidth()
             .background(Gray)
             .height(50.dp)
-            .clickable { onClickAction() },
+            .clickable { goBackAction() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
