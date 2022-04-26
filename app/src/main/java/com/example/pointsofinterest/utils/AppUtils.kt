@@ -33,6 +33,20 @@ const val defaultCameraZoom = 13f
 val madridLatLng = LatLng(40.4148, -3.7008)
 val initialCameraPosition = CameraPosition.fromLatLngZoom(madridLatLng, defaultCameraZoom)
 
+fun String.toLatLng(): List<LatLng> {
+    val latLngList = mutableListOf<LatLng>()
+    for (coordinatesGroup in this.split(" ")) {
+        val latLngCoordinates = coordinatesGroup.split(",").subList(0, 2)
+        latLngList.add(
+            LatLng(
+                latLngCoordinates[1].toDouble(),
+                latLngCoordinates[0].toDouble()
+            )
+        )
+    }
+    return latLngList.toList()
+}
+
 fun bitmapDescriptorFromVector(
     context: Context,
     vectorResId: Int
