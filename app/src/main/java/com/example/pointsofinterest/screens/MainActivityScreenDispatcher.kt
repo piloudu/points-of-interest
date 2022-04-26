@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.pointsofinterest.ui.components.BottomBar
@@ -28,14 +27,19 @@ fun MainActivityScreenDispatcher(
         modifier = modifier
     ) {
         Column {
-            TopBar()
+            TopBar(
+                backAction = {
+                    if (state.value.innerState == LIST)
+                        MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap())
+                }
+            )
             TopDescriptionBar(
                 text = cache.dataModel.name,
-                pois_count = cache.dataModel.poisCount
+                pois_count = cache.dataModel.poisCount,
             )
             when (state.value.innerState) {
                 LOADING, MAP -> MainScreen()
-                LIST -> ListScreen()
+                LIST -> ListScreen(dataModel = cache.dataModel)
             }
         }
         Column(
@@ -43,9 +47,8 @@ fun MainActivityScreenDispatcher(
             verticalArrangement = Arrangement.Bottom
         ) {
             BottomBar(
-                goBackAction = {
-                    if (state.value.innerState == LIST)
-                        MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap())
+                onClickAction = {
+                    MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadList)
                 }
             )
         }

@@ -30,6 +30,11 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
             withViewModelScope {
                 when (userIntent) {
                     is MainActivityUserIntent.LoadMap -> setMapState(oldState, userIntent.url)
+                    is MainActivityUserIntent.LoadList -> setState(
+                        oldState.copy(
+                            innerState = AppState.LIST
+                        )
+                    )
                 }
             }
         }
@@ -57,6 +62,7 @@ object MainViewModelInstance : MainViewModel()
 
 sealed class MainActivityUserIntent : UserIntent {
     class LoadMap(val url: String = HttpUrls.MAIN_DATA.string) : MainActivityUserIntent()
+    object LoadList : MainActivityUserIntent()
 }
 
 data class MainActivityState(
