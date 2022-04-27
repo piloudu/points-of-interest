@@ -2,6 +2,7 @@ package com.example.pointsofinterest
 
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.HttpUrls
+import com.example.pointsofinterest.utils.SortingOptions
 import com.example.pointsofinterest.view_model.AppState
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainActivityState
@@ -61,6 +62,22 @@ class MviTest {
                     innerState = LIST
                 )
                 sendIntent(MainActivityUserIntent.LoadList)
+                val newState = MainViewModelTestInstance.state.value
+                newState shouldBe expectedState
+            }
+        }
+    }
+
+    @DisplayName("on selected sorting option")
+    @Test
+    fun `app sorting option is set properly`() {
+        withTestScope {
+            with(MainViewModelTestInstance) {
+                val initialState = state.value
+                val expectedState = initialState.copy(
+                    sortingOption = SortingOptions.NAME_AZ
+                )
+                sendIntent(MainActivityUserIntent.SelectSortingOption(SortingOptions.NAME_AZ))
                 val newState = MainViewModelTestInstance.state.value
                 newState shouldBe expectedState
             }
