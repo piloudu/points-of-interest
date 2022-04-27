@@ -2,8 +2,7 @@ package com.example.pointsofinterest
 
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.HttpUrls
-import com.example.pointsofinterest.utils.SortingOptions
-import com.example.pointsofinterest.view_model.AppState
+import com.example.pointsofinterest.utils.SortingOption
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainActivityState
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
@@ -75,9 +74,9 @@ class MviTest {
             with(MainViewModelTestInstance) {
                 val initialState = state.value
                 val expectedState = initialState.copy(
-                    sortingOption = SortingOptions.NAME_AZ
+                    sortingOption = SortingOption.NAME_AZ
                 )
-                sendIntent(MainActivityUserIntent.SelectSortingOption(SortingOptions.NAME_AZ))
+                sendIntent(MainActivityUserIntent.SelectSortingOption(SortingOption.NAME_AZ))
                 val newState = MainViewModelTestInstance.state.value
                 newState shouldBe expectedState
             }

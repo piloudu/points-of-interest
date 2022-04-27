@@ -3,10 +3,10 @@ package com.example.pointsofinterest.view_model
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.CacheData
 import com.example.pointsofinterest.get_data.HttpUrls
+import com.example.pointsofinterest.utils.SortingOption
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.selects.select
 
 /**
  * MainViewModel is not made a singleton in order for tests to be able to instance a new object
@@ -34,6 +34,11 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
                     is MainActivityUserIntent.LoadList -> setState(
                         oldState.copy(
                             innerState = AppState.LIST
+                        )
+                    )
+                    is MainActivityUserIntent.SelectSortingOption -> setState(
+                        oldState.copy(
+                            sortingOption = userIntent.sortingOption
                         )
                     )
                 }
@@ -64,15 +69,18 @@ object MainViewModelInstance : MainViewModel()
 sealed class MainActivityUserIntent : UserIntent {
     class LoadMap(val url: String = HttpUrls.MAIN_DATA.string) : MainActivityUserIntent()
     object LoadList : MainActivityUserIntent()
+    class SelectSortingOption(val sortingOption: SortingOption) : MainActivityUserIntent()
 }
 
 data class MainActivityState(
     val innerState: AppState,
+    val sortingOption: SortingOption,
     val cache: CacheData
 ) : UiState {
     companion object {
         fun initial() = MainActivityState(
             innerState = AppState.LOADING,
+            sortingOption = SortingOption.LIKES,
             cache = CacheData()
         )
     }

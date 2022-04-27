@@ -60,23 +60,8 @@ suspend fun URL.downloadImage(): Bitmap {
     }
 }
 
-suspend fun Bitmap.saveToDevice(poiId: Int, type: String) {
-    if (!MainActivity.isContextInitialized()) return
-    val context = MainActivity.getContext()
-    val cw = ContextWrapper(context)
-
-    withContext(Dispatchers.IO) {
-        val directory = cw.getDir("images", Context.MODE_PRIVATE)
-        if (!directory.exists()) directory.mkdir()
-        val file = File(directory, "$type-$poiId.png")
-
-        try {
-            val stream: OutputStream = FileOutputStream(file)
-            this@saveToDevice.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-            stream.flush()
-            stream.close()
-        } catch (e: IOException) {
-            Timber.e(e.message)
-        }
-    }
+enum class SortingOption(displayName: String) {
+    LIKES("Popularidad"),
+    NAME_AZ("Nombre A-Z"),
+    NAME_ZA("Nombre Z-A")
 }
