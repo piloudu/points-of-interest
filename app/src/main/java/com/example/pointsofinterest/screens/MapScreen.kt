@@ -13,6 +13,8 @@ import com.example.pointsofinterest.utils.initialCameraPosition
 import com.example.pointsofinterest.utils.toastMessage
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
+import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import kotlinx.coroutines.launch
@@ -37,6 +39,7 @@ fun MainScreen(
             ))
         ) {
             if (!cache.dataModel.isEmpty()) {
+                cameraPosition.move(CameraUpdateFactory.newCameraPosition(initialCameraPosition))
                 val polygonPoints = cache.dataModel.coordinates
                 MapPolygon(points = polygonPoints)
                 DrawMarkers(cache.dataModel.pois)
