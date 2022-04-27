@@ -62,13 +62,13 @@ fun PopupInfoContent(
     time: String = "22:00 - "
 ) {
 
-    Box{
-        Column (
+    Box {
+        Column(
             modifier = Modifier
                 .width(166.dp)
-                .wrapContentHeight()
                 .background(Black)
-                .padding(start = 16.dp, end = 16.dp, top = 17.dp, bottom = 10.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 17.dp, bottom = 10.dp)
+                .wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -92,7 +92,9 @@ fun PopupInfoContent(
                 )
                 Spacer(modifier = Modifier.width(2.dp))
                 Image(
-                    modifier = Modifier.height(14.dp).width(8.dp),
+                    modifier = Modifier
+                        .height(14.dp)
+                        .width(8.dp),
                     painter = painterResource(id = R.drawable.ic_map_marker),
                     contentDescription = "map marker",
                     colorFilter = ColorFilter.tint(Orange)
