@@ -44,11 +44,6 @@ fun MainActivityScreenDispatcher(
                     dataModel = cache.dataModel
                 )
             }
-            BottomBar(
-                onClickAction = {
-                    MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadList)
-                }
-            )
         }
     }
 }

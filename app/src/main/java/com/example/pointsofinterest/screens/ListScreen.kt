@@ -18,7 +18,10 @@ import androidx.compose.ui.unit.sp
 import com.example.pointsofinterest.R
 import com.example.pointsofinterest.data_model.DataModel
 import com.example.pointsofinterest.data_model.Poi
+import com.example.pointsofinterest.ui.components.BottomBar
 import com.example.pointsofinterest.ui.theme.*
+import com.example.pointsofinterest.view_model.MainActivityUserIntent
+import com.example.pointsofinterest.view_model.MainViewModelInstance
 
 @Preview(showBackground = true)
 @Composable
@@ -28,7 +31,7 @@ fun ListScreen(
 ) {
     Column {
         ListHeader()
-        LazyColumn {
+        LazyColumn(Modifier.weight(1f)) {
             item {
             }
             itemsIndexed(dataModel.pois) { _: Int, poi: Poi ->
@@ -42,6 +45,12 @@ fun ListScreen(
                 }
             }
         }
+        BottomBar(
+            text = "MOSTRAR EN MAPA",
+            onClickAction = {
+                MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap())
+            }
+        )
     }
 }
 
