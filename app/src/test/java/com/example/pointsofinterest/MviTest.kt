@@ -66,20 +66,4 @@ class MviTest {
             }
         }
     }
-
-    @DisplayName("on select map marker")
-    @Test
-    fun `app state stores the selected marker`() {
-        withTestScope {
-            with(MainViewModelTestInstance) {
-                val initialState = state.value
-                val expectedState = initialState.copy(
-                    selectedMarker = 0
-                )
-                sendIntent(MainActivityUserIntent.SelectMarker(0))
-                val newState = MainViewModelTestInstance.state.value
-                newState shouldBe expectedState
-            }
-        }
-    }
 }
