@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.pointsofinterest.screens.CustomInfoWindowAdapter
 import com.example.pointsofinterest.screens.ScreensBackbone
 import com.example.pointsofinterest.ui.theme.LightGray
 import com.example.pointsofinterest.ui.theme.PointsOfInterestTheme
@@ -17,10 +16,8 @@ import com.example.pointsofinterest.utils.LockScreenOrientation
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 
-class MainActivity : ComponentActivity(), OnMapReadyCallback {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadMap())
@@ -48,9 +45,5 @@ class MainActivity : ComponentActivity(), OnMapReadyCallback {
         fun isContextInitialized(): Boolean {
             return ::appContext.isInitialized
         }
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        map.setInfoWindowAdapter(CustomInfoWindowAdapter(applicationContext))
     }
 }
