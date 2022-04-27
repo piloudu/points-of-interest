@@ -1,5 +1,6 @@
 package com.example.pointsofinterest.ui.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,53 +64,74 @@ fun PopupInfoContent(
     location: String = "Sala La Riviera",
     time: String = "22:00 - "
 ) {
+    val trianglePath = Path().apply {
+        with(LocalDensity.current) {
+            val width = 24.dp.toPx()
+            val height = 16.dp.toPx()
+            moveTo(width / 2f, height)
+            lineTo(width, 0f)
+            lineTo(0f, 0f)
+        }
+    }
 
-    Box {
-        Column(
-            modifier = Modifier
-                .width(166.dp)
-                .background(Black)
-                .padding(start = 16.dp, end = 16.dp, top = 17.dp, bottom = 10.dp)
-                .wrapContentHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = poiName,
-                textAlign = TextAlign.Center,
-                letterSpacing = 0.34.sp,
-                color = White,
-                fontSize = 18.sp,
-                fontFamily = Gothics
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box {
+            Column(
+                modifier = Modifier
+                    .width(166.dp)
+                    .background(Black)
+                    .padding(start = 16.dp, end = 16.dp, top = 17.dp, bottom = 10.dp)
+                    .wrapContentHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = time,
-                    letterSpacing = 0.19.sp,
-                    fontSize = 10.sp,
-                    color = LightGray,
-                    fontFamily = RobotoRegular
+                    text = poiName,
+                    textAlign = TextAlign.Center,
+                    letterSpacing = 0.34.sp,
+                    color = White,
+                    fontSize = 18.sp,
+                    fontFamily = Gothics
                 )
-                Spacer(modifier = Modifier.width(2.dp))
-                Image(
-                    modifier = Modifier
-                        .height(14.dp)
-                        .width(8.dp),
-                    painter = painterResource(id = R.drawable.ic_map_marker),
-                    contentDescription = "map marker",
-                    colorFilter = ColorFilter.tint(Orange)
-                )
-                Spacer(modifier = Modifier.width(2.dp))
-                Text(
-                    text = location,
-                    letterSpacing = 0.19.sp,
-                    fontSize = 10.sp,
-                    color = Orange,
-                    fontFamily = RobotoBold
-                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = time,
+                        letterSpacing = 0.19.sp,
+                        fontSize = 10.sp,
+                        color = LightGray,
+                        fontFamily = RobotoRegular
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Image(
+                        modifier = Modifier
+                            .height(14.dp)
+                            .width(8.dp),
+                        painter = painterResource(id = R.drawable.ic_map_marker),
+                        contentDescription = "map marker",
+                        colorFilter = ColorFilter.tint(Orange)
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = location,
+                        letterSpacing = 0.19.sp,
+                        fontSize = 10.sp,
+                        color = Orange,
+                        fontFamily = RobotoBold
+                    )
+                }
             }
+        }
+        Canvas(
+            modifier = Modifier
+                .width(24.dp)
+                .height(16.dp)
+        ) {
+            drawPath(
+                color = Black,
+                path = trianglePath
+            )
         }
     }
 }
