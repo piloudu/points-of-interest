@@ -1,22 +1,16 @@
 package com.example.pointsofinterest.utils
 
-import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import com.example.pointsofinterest.MainActivity
+import com.example.pointsofinterest.data_model.Poi
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import kotlinx.coroutines.*
-import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStream
 import java.net.URL
 
 inline fun <reified T> String.deserialize(): T = Gson().fromJson(this, T::class.java)
@@ -33,7 +27,7 @@ suspend fun toastMessage(message: String) {
         }
 }
 
-const val defaultCameraZoom = 14.5f
+const val defaultCameraZoom = 15.5f
 val madridLatLng = LatLng(40.4182777396748, -3.709368076150352)
 val initialCameraPosition = CameraPosition.fromLatLngZoom(madridLatLng, defaultCameraZoom)
 
@@ -64,4 +58,12 @@ enum class SortingOption(val displayName: String) {
     LIKES("Popularidad"),
     NAME_AZ("Nombre A-Z"),
     NAME_ZA("Nombre Z-A")
+}
+
+fun List<Poi>.sortedWithOption(sortingOption: SortingOption): List<Poi> {
+    return when (sortingOption) {
+        SortingOption.LIKES -> this.sortedBy { it.likesCount }
+        SortingOption.NAME_AZ -> this.sortedBy { it.name[0] }
+        SortingOption.NAME_ZA -> this.sortedByDescending { it.name[0] }
+    }
 }

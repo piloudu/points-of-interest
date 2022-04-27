@@ -4,6 +4,7 @@ import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.CacheData
 import com.example.pointsofinterest.get_data.HttpUrls
 import com.example.pointsofinterest.utils.SortingOption
+import com.example.pointsofinterest.utils.sortedWithOption
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
@@ -18,9 +19,6 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
     override val state: StateFlow<MainActivityState> = reducer.state
 
     fun sendIntent(userIntent: MainActivityUserIntent) {
-        withViewModelScope(Dispatchers.Default) {
-            userIntent.action()
-        }
         reducer.sendIntent(userIntent)
     }
 
@@ -38,7 +36,12 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
                     )
                     is MainActivityUserIntent.SelectSortingOption -> setState(
                         oldState.copy(
-                            sortingOption = userIntent.sortingOption
+                            sortingOption = userIntent.sortingOption,
+                            cache = oldState.cache.copy(
+                                dataModel = oldState.cache.dataModel.copy(
+                                    pois = oldState.cache.dataModel.pois.sortedWithOption(userIntent.sortingOption)
+                                )
+                            )
                         )
                     )
                 }
