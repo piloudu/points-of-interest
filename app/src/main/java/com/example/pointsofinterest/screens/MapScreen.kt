@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.R
 import com.example.pointsofinterest.data_model.isEmpty
@@ -54,4 +55,12 @@ fun MainScreen(
             }
         )
     }
+}
+
+@Preview
+@Composable
+fun PopupInfo(
+    modifier: Modifier = Modifier
+) {
+
 }

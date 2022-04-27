@@ -2,6 +2,7 @@ package com.example.pointsofinterest
 
 import com.example.pointsofinterest.get_data.Cache
 import com.example.pointsofinterest.get_data.HttpUrls
+import com.example.pointsofinterest.view_model.AppState
 import com.example.pointsofinterest.view_model.AppState.*
 import com.example.pointsofinterest.view_model.MainActivityState
 import com.example.pointsofinterest.view_model.MainActivityUserIntent
@@ -42,6 +43,38 @@ class MviTest {
                     cache = Cache.get(url)
                 )
                 sendIntent(MainActivityUserIntent.LoadMap(url))
+                val newState = MainViewModelTestInstance.state.value
+                newState shouldBe expectedState
+            }
+        }
+    }
+
+    @DisplayName("on load list")
+    @Test
+    fun `app innerState is set to LIST for LoadList intent`() {
+        withTestScope {
+            with(MainViewModelTestInstance) {
+                val initialState = state.value
+                val expectedState = initialState.copy(
+                    innerState = LIST
+                )
+                sendIntent(MainActivityUserIntent.LoadList)
+                val newState = MainViewModelTestInstance.state.value
+                newState shouldBe expectedState
+            }
+        }
+    }
+
+    @DisplayName("on select map marker")
+    @Test
+    fun `app state stores the selected marker`() {
+        withTestScope {
+            with(MainViewModelTestInstance) {
+                val initialState = state.value
+                val expectedState = initialState.copy(
+                    selectedMarker = 0
+                )
+                sendIntent(MainActivityUserIntent.SelectMarker(0))
                 val newState = MainViewModelTestInstance.state.value
                 newState shouldBe expectedState
             }

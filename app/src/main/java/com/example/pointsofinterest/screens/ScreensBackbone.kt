@@ -18,7 +18,7 @@ val modifier = Modifier
     .background(color = Color.White)
 
 @Composable
-fun MainActivityScreenDispatcher(
+fun ScreensBackbone(
 ) {
     val state = MainViewModelInstance.state.collectAsState()
     val cache = state.value.cache

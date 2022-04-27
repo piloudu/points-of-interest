@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.pointsofinterest.screens.MainActivityScreenDispatcher
+import com.example.pointsofinterest.screens.ScreensBackbone
 import com.example.pointsofinterest.ui.theme.LightGray
 import com.example.pointsofinterest.ui.theme.PointsOfInterestTheme
 import com.example.pointsofinterest.utils.LockScreenOrientation
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     systemUiController.setSystemBarsColor(LightGray)
 
                     LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED)
-                    MainActivityScreenDispatcher()
+                    ScreensBackbone()
                 }
             }
         }

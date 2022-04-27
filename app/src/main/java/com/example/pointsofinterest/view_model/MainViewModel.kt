@@ -6,6 +6,7 @@ import com.example.pointsofinterest.get_data.HttpUrls
 import com.example.pointsofinterest.utils.withViewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.selects.select
 
 /**
  * MainViewModel is not made a singleton in order for tests to be able to instance a new object
@@ -30,6 +31,11 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
             withViewModelScope {
                 when (userIntent) {
                     is MainActivityUserIntent.LoadMap -> setMapState(oldState, userIntent.url)
+                    is MainActivityUserIntent.SelectMarker -> setState(
+                        oldState.copy(
+                            selectedMarker = userIntent.markerId
+                        )
+                    )
                     is MainActivityUserIntent.LoadList -> setState(
                         oldState.copy(
                             innerState = AppState.LIST
@@ -62,16 +68,19 @@ object MainViewModelInstance : MainViewModel()
 
 sealed class MainActivityUserIntent : UserIntent {
     class LoadMap(val url: String = HttpUrls.MAIN_DATA.string) : MainActivityUserIntent()
+    class SelectMarker(val markerId: Int) : MainActivityUserIntent()
     object LoadList : MainActivityUserIntent()
 }
 
 data class MainActivityState(
     val innerState: AppState,
+    val selectedMarker: Int?,
     val cache: CacheData
 ) : UiState {
     companion object {
         fun initial() = MainActivityState(
             innerState = AppState.LOADING,
+            selectedMarker = null,
             cache = CacheData()
         )
     }
