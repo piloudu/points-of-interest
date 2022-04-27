@@ -47,7 +47,7 @@ fun ScreensBackbone(
                 LOADING, MAP -> MainScreen(modifier = Modifier.weight(1f))
                 LIST -> ListScreen(
                     modifier = Modifier.weight(1f),
-                    dataModel = cache.dataModel
+                    state = state.value
                 )
             }
         }

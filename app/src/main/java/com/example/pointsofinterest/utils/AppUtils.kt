@@ -33,7 +33,7 @@ suspend fun toastMessage(message: String) {
         }
 }
 
-const val defaultCameraZoom = 15f
+const val defaultCameraZoom = 14.5f
 val madridLatLng = LatLng(40.4182777396748, -3.709368076150352)
 val initialCameraPosition = CameraPosition.fromLatLngZoom(madridLatLng, defaultCameraZoom)
 
@@ -60,7 +60,7 @@ suspend fun URL.downloadImage(): Bitmap {
     }
 }
 
-enum class SortingOption(displayName: String) {
+enum class SortingOption(val displayName: String) {
     LIKES("Popularidad"),
     NAME_AZ("Nombre A-Z"),
     NAME_ZA("Nombre Z-A")
