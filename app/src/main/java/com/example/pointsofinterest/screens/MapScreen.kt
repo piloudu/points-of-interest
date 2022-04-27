@@ -1,11 +1,17 @@
 package com.example.pointsofinterest.screens
 
+import android.annotation.SuppressLint
+import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.LayoutInflaterFactory
 import com.example.pointsofinterest.MainActivity
 import com.example.pointsofinterest.R
 import com.example.pointsofinterest.data_model.isEmpty
@@ -16,7 +22,10 @@ import com.example.pointsofinterest.view_model.MainActivityUserIntent
 import com.example.pointsofinterest.view_model.MainViewModelInstance
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 import kotlinx.coroutines.launch
 
@@ -37,7 +46,8 @@ fun MainScreen(
             uiSettings = MapUiSettings(zoomControlsEnabled = false),
             properties = MapProperties(mapStyleOptions = MapStyleOptions(
                 resources.openRawResource(R.raw.maps_config).bufferedReader().use { it.readText() }
-            ))
+            )),
+            googleMapOptionsFactory = { GoogleMapOptions(). }
         ) {
             if (!cache.dataModel.isEmpty()) {
                 cameraPosition.move(CameraUpdateFactory.newCameraPosition(initialCameraPosition))
@@ -57,10 +67,24 @@ fun MainScreen(
     }
 }
 
-@Preview
-@Composable
-fun PopupInfo(
-    modifier: Modifier = Modifier
-) {
+class CustomInfoWindowAdapter : GoogleMap.InfoWindowAdapter {
+    private val context = MainActivity.getContext()
+    private val window: View = LayoutInflater.from(context).inflate(R.layout.custom_popup, null)
 
+    private fun setInfoWindowText(marker: Marker) {
+        val title = marker.title
+        val tvTitle = window.findViewById<TextView>(R.id.custom_popup)
+        if (!TextUtils.isEmpty(title)) {
+            tvTitle.text = title
+        }
+    }
+
+    override fun getInfoContents(marker: Marker): View? {
+        return null
+    }
+
+    override fun getInfoWindow(marker: Marker): View {
+        setInfoWindowText(marker)
+        return window
+    }
 }

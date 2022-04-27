@@ -34,7 +34,8 @@ fun DrawMarkers(
             state = MarkerState(
                 position = it.position
             ),
-            icon = BitmapDescriptorFactory.fromBitmap(it.marker)
+            icon = BitmapDescriptorFactory.fromBitmap(it.marker),
+            title = it.name
         )
     }
 }
