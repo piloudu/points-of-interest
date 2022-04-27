@@ -27,6 +27,7 @@ data class DeserializedDataStructure(
 data class DeserializedPoi(
     val latitude: String,
     val longitude: String,
+    val description: String,
     val id: Int,
     val name: String,
     val image: Image,
@@ -55,6 +56,7 @@ suspend fun DeserializedDataStructure.toCache(): CacheData {
         pois.add(
             Poi(
                 name = it.name,
+                description = it.description,
                 position = LatLng(it.latitude.toDouble(), it.longitude.toDouble()),
                 id = it.id,
                 image = image,

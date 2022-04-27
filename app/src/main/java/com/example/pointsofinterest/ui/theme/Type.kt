@@ -20,6 +20,14 @@ val RobotoMedium = FontFamily(
     Font(R.font.roboto_medium)
 )
 
+val RobotoRegular = FontFamily(
+    Font(R.font.roboto_regular)
+)
+
+val RobotoBold = FontFamily(
+    Font(R.font.roboto_bold)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
