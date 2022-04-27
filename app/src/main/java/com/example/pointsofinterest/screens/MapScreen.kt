@@ -26,7 +26,6 @@ fun MainScreen(
     val state = MainViewModelInstance.state.collectAsState()
     val cache = state.value.cache
     val cameraPosition = rememberCameraPositionState { position = initialCameraPosition }
-    val coroutineScope = rememberCoroutineScope()
 
     Column {
         GoogleMap(
@@ -44,13 +43,5 @@ fun MainScreen(
                 DrawMarkers(cache.dataModel.pois)
             }
         }
-        BottomBar(
-            text = "MOSTRAR EN LISTADO",
-            onClickAction = {
-                if (cache.dataModel.isEmpty())
-                    coroutineScope.launch { toastMessage("Descargando datos") }
-                else MainViewModelInstance.sendIntent(MainActivityUserIntent.LoadList)
-            }
-        )
     }
 }
