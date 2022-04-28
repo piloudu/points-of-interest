@@ -41,7 +41,7 @@ val mockDeserializedDataStructure = DeserializedDataStructure(
 )
 
 val mockJson = """
-    { "name": "mockDataStructure", "pois_count": 1, "coordinates": "12, 17",
+    { "name": "mockDataStructure", "pois_count": 1, "coordinates": "12,17",
      "pois": [{
          "latitude": 20,
          "longitude": 10,
@@ -51,5 +51,6 @@ val mockJson = """
          "image": { "url": "image URL" },
          "category": { "marker": { "url": "marker URL" } },
          "likes_count": 8
-         }
+         }]
+     }
 """.trimIndent()
