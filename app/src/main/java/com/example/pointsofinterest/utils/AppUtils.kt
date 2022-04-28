@@ -62,7 +62,7 @@ enum class SortingOption(val displayName: String) {
 
 fun List<Poi>.sortedWithOption(sortingOption: SortingOption): List<Poi> {
     return when (sortingOption) {
-        SortingOption.LIKES -> this.sortedBy { it.likesCount }
+        SortingOption.LIKES -> this.sortedByDescending { it.likesCount }
         SortingOption.NAME_AZ -> this.sortedBy { it.name[0] }
         SortingOption.NAME_ZA -> this.sortedByDescending { it.name[0] }
     }
