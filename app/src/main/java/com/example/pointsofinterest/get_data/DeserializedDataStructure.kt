@@ -24,7 +24,7 @@ data class DeserializedPoi(
     val name: String,
     val image: Image,
     val category: Category,
-    var likesCount: Int
+    @SerializedName("pois_count") val likesCount: Int
 )
 
 data class Image(

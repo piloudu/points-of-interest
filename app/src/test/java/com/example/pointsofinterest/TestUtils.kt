@@ -1,5 +1,8 @@
 package com.example.pointsofinterest
 
+import com.example.pointsofinterest.data_model.DataModel
+import com.example.pointsofinterest.data_model.Poi
+import com.example.pointsofinterest.get_data.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -15,12 +18,38 @@ internal fun withTestScope(scope: suspend CoroutineScope.() -> Unit) {
     }
 }
 
-//val mockPois = listOf(
-//    Poi(name = "poi1", url = "https://poi1", likesCount = 2),
-//    Poi(name = "poi2", url = "https://poi2", likesCount = 3),
-//    Poi(name = "poi3", url = "https://poi3", likesCount = 4)
-//)
-//
-//val mockDataModel = DataModel(
-//    name = "mockPoi", pois = mockPois, poisCount = 3, coordinates = "3,4 5,6 7,8"
-//)
+val mockDeserializedPoi = DeserializedPoi(
+    latitude = "20",
+    longitude = "10",
+    description = "poi1",
+    id = 5,
+    name = "poi name",
+    image = Image(url = "image URL"),
+    category = Category(
+        marker = Marker(
+            url = "marker URL"
+        )
+    ),
+    likesCount = 8
+)
+
+val mockDeserializedDataStructure = DeserializedDataStructure(
+    name = "mockDataStructure",
+    deserializedPois = listOf(mockDeserializedPoi),
+    poisCount = 1,
+    coordinates = "12,17"
+)
+
+val mockJson = """
+    { "name": "mockDataStructure", "pois_count": 1, "coordinates": "12, 17",
+     "pois": [{
+         "latitude": 20,
+         "longitude": 10,
+         "description": "poi1",
+         "id": 5,
+         "name": "poi name",
+         "image": { "url": "image URL" },
+         "category": { "marker": { "url": "marker URL" } },
+         "likes_count": 8
+         }
+""".trimIndent()
