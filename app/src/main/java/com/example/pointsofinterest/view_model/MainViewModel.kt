@@ -31,7 +31,14 @@ abstract class MainViewModel : BaseViewModel<MainActivityState, MainActivityUser
                     is MainActivityUserIntent.LoadMap -> setMapState(oldState, userIntent.url)
                     is MainActivityUserIntent.LoadList -> setState(
                         oldState.copy(
-                            innerState = AppState.LIST
+                            innerState = AppState.LIST,
+                            cache = oldState.cache.copy(
+                                dataModel = oldState.cache.dataModel.copy(
+                                    pois = oldState.cache.dataModel.pois.sortedWithOption(
+                                        SortingOption.LIKES
+                                    )
+                                )
+                            )
                         )
                     )
                     is MainActivityUserIntent.SelectSortingOption -> setState(
